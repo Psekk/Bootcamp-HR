@@ -1,17 +1,22 @@
+import re
+
 if __name__ == "__main__":
     holidays = {
-        "Month: 1, Day: 1": "Nieuwjaarsdag",
-        "Month: 4, Day: 7": "Goede vrijdag",
-        "Month: 4, Day: 9": "Eerste paasdag",
-        "Month: 4, Day: 10": "Tweede paasdag",
-        "Month: 4, Day: 27": "Koningsdag",
-        "Month: 5, Day: 5": "Bevrijdingsdag",
-        "Month: 5, Day: 18": "Hemelvaartsdag",
-        "Month: 5, Day: 28": "Eerste pinksterdag",
-        "Month: 5, Day: 29": "Tweede pinksterdag",
-        "Month: 12, Day: 25": "Eerste kerstdag",
-        "Month: 12, Day: 26": "Tweede kerstdag",
+        (1, 1): "Nieuwjaarsdag",
+        (4, 7): "Goede vrijdag",
+        (4, 9): "Eerste paasdag",
+        (4, 10): "Tweede paasdag",
+        (4, 27): "Koningsdag",
+        (5, 5): "Bevrijdingsdag",
+        (5, 18): "Hemelvaartsdag",
+        (5, 28): "Eerste pinksterdag",
+        (5, 29): "Tweede pinksterdag",
+        (12, 25): "Eerste kerstdag",
+        (12, 26): "Tweede kerstdag",
     }
 
-    date = input("Datum: ")
-    print(holidays[date] if date in holidays else "Geen feestdag bekend op die datum")
+    date_input = input("Datum: ")
+    regex_result = re.search("[Mm]onth:\s?(\d{1,2}),\s?[Dd]ay:\s?(\d{1,2})", date_input)
+    month, day = int(regex_result.groups()[0]), int(regex_result.groups()[1])
+
+    print(holidays[(month, day)] if (month, day) in holidays else "Geen feestdag bekend op die datum")

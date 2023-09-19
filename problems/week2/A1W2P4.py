@@ -1,6 +1,7 @@
 if __name__ == '__main__':
-    sides = [int(string[2]) for string in input("In: ").split(", ")]
-    a, b, c = sides[0], sides[1], sides[2]
+    raw_input = input("In: ")
+    sides = [int(string[2:len(string)]) for string in raw_input.split("," + (" " if ", " in raw_input else ""))]
+    a, b, c = sides
 
     triangle_type = "Scalene"
     if a == b == c:
